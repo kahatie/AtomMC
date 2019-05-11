@@ -1,0 +1,34 @@
+version: '3'
+services:
+  mc:
+    build: .
+    container_name: mc
+    hostname: mc
+    environment:
+      - WORKDIR /opt/minecraft
+    depends_on:
+      - mc_db
+    ports:
+    - "25565:25565"
+    volumes:
+    - D:/docker/mc/log:/opt/minecraft/logs
+    - D:/docker/mc/world:/opt/minecraft/world
+    - D:/docker/mc/server.properties:/opt/minecraft/server.properties
+    links:
+    - mc_db
+  mc_db:
+    image: mysql:5.7
+    container_name: mc_db
+    hostname: mc_db
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'mc_db'
+      MYSQL_USER: 'user'
+      MYSQL_PASSWORD: 'password'
+      MYSQL_ROOT_PASSWORD: 'password'
+    ports: 
+    - '3306:3306'
+    expose:
+    - '3306'
+    volumes:
+    - D:/docker/mc/db:/var/lib/mysql
