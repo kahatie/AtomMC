@@ -1,5 +1,5 @@
 # AtomMC
-Minecraft docker with AtomMC 
+Minecraft docker with AtomMC 1.12.2
 
-change volume path and password in docker-compose.yml then run "docker-compose up"
+checkout, change volume path and password in docker-compose.yml, then run "docker-compose up"
  
