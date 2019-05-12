@@ -1,21 +1,23 @@
 version: '3'
 services:
   mc:
-    build: .
+    build: ./mc
     container_name: mc
     hostname: mc
     environment:
       - WORKDIR /opt/minecraft
-    depends_on:
-      - mc_db
+#    depends_on:
+#      - mc_db
     ports:
     - "25565:25565"
     volumes:
-    - D:/docker/mc/log:/opt/minecraft/logs
-    - D:/docker/mc/world:/opt/minecraft/world
-    - D:/docker/mc/server.properties:/opt/minecraft/server.properties
+    - D:/docker/mc/data:/opt/minecraft/data
     links:
     - mc_db
+  mc_pannel:
+    image: openjdk:8-alpine
+    ports:
+    - "80:80"
   mc_db:
     image: mysql:5.7
     container_name: mc_db
